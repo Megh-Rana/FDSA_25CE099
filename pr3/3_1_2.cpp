@@ -1,37 +1,34 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void sort_approach3(vector<int>& nums)
+vector<int> sort_approach2(vector<int> &nums)
 {
-    int n = nums.size();
-
-    for(int i = 1; i < n; i++)
+    int n=nums.size();
+    for(int i=0;i<n-1;i++)
     {
-        int key = nums[i];
-        int j = i - 1;
-
-        while(j >= 0 && nums[j] > key)
+        int min_idx=i;
+        for(int j=i;j<n;j++)
         {
-            nums[j + 1] = nums[j];
-            j--;
-        }
-
-        nums[j + 1] = key;
+            if(nums[j] < nums[min_idx])
+                min_idx = j;
+        }      
+        swap(nums[min_idx],nums[i]);
     }
+    return nums;
 }
 
 int main()
 {
     int n;
     cin >> n;
-
     vector<int> nums(n);
-
-    for(int i = 0; i < n; i++)
+    for(int i=0;i<n;i++)
+    {
         cin >> nums[i];
-
-    sort_approach3(nums);
-
-    for(int x : nums)
-        cout << x << " ";
+    }
+    nums = sort_approach2(nums);
+    for(int i=0;i<n;i++)
+    {
+        cout << nums[i] << " ";
+    }
 }
